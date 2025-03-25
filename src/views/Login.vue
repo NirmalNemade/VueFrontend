@@ -30,7 +30,7 @@ const handleLogin = async (): Promise<void> => {
   try {
     await authStore.login(email.value, password.value);
     ElMessage.success('Login successful');
-    router.push('/employees');
+    router.push('/module');
   } catch (error) {
     ElMessage.error('Login failed');
     console.error('Login failed', error);

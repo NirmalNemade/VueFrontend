@@ -1,19 +1,3 @@
-// import axios from 'axios';
-
-// export const login = async (email: string, password: string) => {
-//   const response = await axios.post('/auth/login', { email, password });
-//   return response.data;
-// };
-
-// export const signup = async (name: string, email: string, password: string) => {
-//   const response = await axios.post('/auth/signup', { name, email, password });
-//   return response.data;
-// };
-
-// export const logout = () => {
-//   localStorage.removeItem('token');
-//   delete axios.defaults.headers.common['Authorization'];
-// };
 import apiClient from './axios';
 
 interface LoginResponse {
@@ -30,6 +14,8 @@ interface SignupResponse {
     id: number;
     email: string;
     name: string;
+    phoneNumber: string;
+    role: string; // 👈 Ensure role is a string
   };
   error: string | null;
 }
@@ -39,8 +25,24 @@ export const login = async (email: string, password: string): Promise<LoginRespo
   return response.data;
 };
 
-export const signup = async (name: string, email: string, password: string): Promise<SignupResponse> => {
-  const response = await apiClient.post('/auth/signup', { name, email, password });
+export const signup = async (
+  name: string,
+  email: string,
+  phoneNumber: string,
+  password: string,
+  role: string // Ensure role is a string
+): Promise<SignupResponse> => {
+  const payload = {
+    name,
+    email,
+    phoneNumber,
+    password,
+    role, // 👈 Send role as a plain string, not an object
+  };
+
+  console.log("Signup Payload:", JSON.stringify(payload, null, 2)); // Debugging log
+
+  const response = await apiClient.post('/auth/signup', payload);
   return response.data;
 };
 

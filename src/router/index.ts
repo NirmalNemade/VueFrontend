@@ -5,6 +5,13 @@ import Dashboard from '../views/Dashboard.vue';
 import EmployeeList from '../views/EmployeeList.vue';
 import EmployeeForm from '../views/EmployeeForm.vue';
 import { useAuthStore } from '../store/authStore';
+import MyModules from '../views/MyModules.vue';
+import BrowseModules from '../views/BrowseModules.vue';
+import ProgressReport from '../views/ProgressReport.vue';
+import ModulesList from "../views/ModulesList.vue";
+import AddModule from "../views/AddModule.vue";
+import UpdateModule from "../components/UpdateModule.vue";
+
 
 const routes = [
   { path: '/', component: Login },
@@ -28,6 +35,16 @@ const routes = [
     path: '/employees/edit/:id', 
     component: EmployeeForm, 
     meta: { requiresAuth: true }
+  },
+  { path: '/my-modules', component: MyModules },
+  { path: '/browse', component: BrowseModules },
+  { path: '/progress', component: ProgressReport },
+  { path: "/module", component: ModulesList },
+  { path: "/add-module", component: AddModule },
+  {
+    path: '/update-module/:id',
+    name: 'UpdateModule',
+    component: UpdateModule
   }
 ];
 
